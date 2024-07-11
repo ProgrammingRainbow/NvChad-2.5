@@ -39,3 +39,25 @@ o.tabstop = 4
 o.softtabstop = 4
 
 ```
+
+List treesitter installed languages.
+```
+:TSInstallInfo
+```
+Check loaded treesitter language.
+```
+:lua print(require"nvim-treesitter.parsers".get_buf_lang())
+```
+Check filetype
+```
+:echo &filetype
+```
+or
+```
+:set filetype?
+```
+Set filetype
+```
+:set filetype=fish
+```
+
