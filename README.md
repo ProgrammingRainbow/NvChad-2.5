@@ -39,8 +39,48 @@ o.tabstop = 4
 o.softtabstop = 4
 
 ```
-## Basic treesitter commands.
-List treesitter installed languages.
+## Setup Treesitter
+Added to the Top of `~/.config/nvim/lua/plugins/init.lua`. 
+```
+    {
+        "nvim-treesitter/nvim-treesitter",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("configs.nvim-treesitter")
+        end,
+    },
+```
+Create file `~/.config/nvim/lua/configs/nvim-treesitter.lua`. \
+Copy from the internal one.
+https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/configs/treesitter.lua
+```
+local options = {
+    ensure_installed = {
+        "bash",
+        "fish",
+        "lua",
+        "luadoc",
+        "markdown",
+        "printf",
+        "toml",
+        "vim",
+        "vimdoc",
+        "yaml",
+    },
+
+    highlight = {
+        enable = true,
+        use_languagetree = true,
+    },
+
+    indent = { enable = true },
+}
+
+require("nvim-treesitter.configs").setup(options)
+```
+
+## Basic Treesitter commands.
+List Treesitter installed languages.
 ```
 :TSInstallInfo
 ```
@@ -69,7 +109,11 @@ Check loaded treesitter language.
 ```
 :lua print(require"nvim-treesitter.parsers".get_buf_lang())
 ```
-Check filetype
+or
+```
+:Inspect
+```
+Check filetype of buffer.
 ```
 :echo &filetype
 ```
@@ -77,7 +121,7 @@ or
 ```
 :set filetype?
 ```
-Set filetype
+Set filetype.
 ```
 :set filetype=fish
 ```
