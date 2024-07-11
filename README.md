@@ -22,14 +22,11 @@ Install NvChad config from https://nvchad.com/docs/quickstart/install
 ```
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 ```
-
-`:MasonInstallAll`
-
-
-`~/.config/nvim/lua/options.lua`
+Edit the file `~/.config/nvim/lua/options.lua`.
 ```
 -- local o = vim.o
 ```
+To this.
 ```
 local o = vim.o
 
