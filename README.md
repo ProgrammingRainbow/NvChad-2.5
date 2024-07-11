@@ -39,11 +39,32 @@ o.tabstop = 4
 o.softtabstop = 4
 
 ```
-
+## Basic treesitter commands.
 List treesitter installed languages.
 ```
 :TSInstallInfo
 ```
+Install fish for treesitter.
+```
+:TSInstall fish
+```
+Update fish.
+```
+:TSUpdate fish
+```
+Update all.
+```
+:TSUpdate
+```
+Disable treesitter highlighting.
+```
+:TSDisable highlight
+```
+Enable treesitter highlighting.
+```
+:TSEnable highlight
+```
+## Treesitter language for filetype.
 Check loaded treesitter language.
 ```
 :lua print(require"nvim-treesitter.parsers".get_buf_lang())
