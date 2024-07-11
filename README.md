@@ -37,6 +37,7 @@ o.softtabstop = 4
 
 ```
 ## Setup Treesitter
+https://github.com/nvim-treesitter/nvim-treesitter \
 Added to the Top of `~/.config/nvim/lua/plugins/init.lua`. 
 ```
     {
