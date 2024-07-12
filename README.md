@@ -246,7 +246,8 @@ Create file `~/.config/nvim/lua/configs/lint.lua`. \
 `lint.linters_by_ft` is a key, value table for all linters to be configured. \
 `lint.linters.laucheck.args = {` Will over write the arguments table for luacheck. \
 To get the default args before editing use this command \
-`:lua print(vim.inspect(require('lint').linters.luacheck.args))`.
+`:lua print(vim.inspect(require('lint').linters.luacheck.args))`. \
+Create an auto command to run the linter when opeing a buffer, saving or leaving insert mode.
 ```
 local lint = require("lint")
 
