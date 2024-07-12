@@ -22,6 +22,10 @@ Install NvChad config from https://nvchad.com/docs/quickstart/install
 ```
 git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 ```
+Or this already configured version
+```
+git clone https://github.com/ProgrammingRainbow/NvChad-2.5 ~/.config/nvim && nvim
+```
 Edit the file `~/.config/nvim/lua/options.lua` to change tabs from 2 to 4 spaces. \
 Original config is here https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/options.lua
 ```
