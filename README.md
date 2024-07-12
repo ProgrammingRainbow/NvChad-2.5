@@ -36,6 +36,42 @@ o.tabstop = 4
 o.softtabstop = 4
 
 ```
+Edit `~/.config/nvim/.stylua.toml` to change indent width to 4 and to use parentheses.
+```
+column_width = 120
+line_endings = "Unix"
+indent_type = "Spaces"
+indent_width = 4
+quote_style = "AutoPreferDouble"
+# call_parentheses = "None"
+```
+## Setup Format and Style with Conform.
+Edit `~/.config/nvim/lua/plugins/init.lua` to load module on save.
+```
+    {
+        "stevearc/conform.nvim",
+        event = "BufWritePre",
+        config = function()
+            require("configs.conform")
+        end,
+    },
+```
+Edit `~/.config/nvim/lua/configs/conform.lua` to enable format_on_save.
+```
+local options = {
+    formatters_by_ft = {
+        lua = { "stylua" },
+    },
+
+    format_on_save = {
+        -- These options will be passed to conform.format()
+        timeout_ms = 500,
+        lsp_fallback = true,
+    },
+}
+
+require("conform").setup(options)
+```
 ## Setup Treesitter
 https://github.com/nvim-treesitter/nvim-treesitter \
 Added to the Top of `~/.config/nvim/lua/plugins/init.lua`. 
@@ -123,4 +159,3 @@ Set filetype.
 ```
 :set filetype=fish
 ```
-
