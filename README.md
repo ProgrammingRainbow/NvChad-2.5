@@ -1,3 +1,5 @@
+![Screenshot](screenshot.png)
+
 # Installing NvChad Version 2.5
 ## Backup and remove old nvim config.
 Backup old nvim config.
