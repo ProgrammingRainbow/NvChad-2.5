@@ -18,7 +18,7 @@ rm -rf ~/.local/share/nvim
 ## Install NvChad.
 Install required packages.
 ```
-sudo pacman -S --needed neovim xclip wl-clipboard unzip
+sudo pacman -S --needed neovim unzip luarocks xclip wl-clipboard
 ```
 Install NvChad config from https://nvchad.com/docs/quickstart/install
 ```
