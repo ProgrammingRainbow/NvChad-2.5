@@ -160,3 +160,71 @@ Set filetype.
 ```
 :set filetype=fish
 ```
+## Setup LSPConfig.
+Under Treesitter add an lspconfig entry.
+```
+    {
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("nvchad.configs.lspconfig").defaults()
+            require("configs.lspconfig")
+        end,
+    },
+```
+We will be adding a table that has a list of all servers configured. \
+This will be used later in the mason-lspconfig to automate there installation. \
+Then we will have a simple default_servers table for looping and setting up default configs. \
+Using the NvChad default lua_ls found \
+here https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/configs/lspconfig.lua \
+we will add love2d support `"${3rd}/love2d/library",` but also disable linting diagnostics.
+```
+local on_attach = require("nvchad.configs.lspconfig").on_attach
+local on_init = require("nvchad.configs.lspconfig").on_init
+local capabilities = require("nvchad.configs.lspconfig").capabilities
+
+local lspconfig = require("lspconfig")
+
+-- list of all servers configured.
+lspconfig.servers = {
+    "lua_ls",
+}
+
+-- list of servers configured with default config.
+local default_servers = {}
+
+-- lsps with default config
+for _, lsp in ipairs(default_servers) do
+    lspconfig[lsp].setup({
+        on_attach = on_attach,
+        on_init = on_init,
+        capabilities = capabilities,
+    })
+end
+
+require("lspconfig").lua_ls.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+
+    settings = {
+        Lua = {
+            diagnostics = {
+                enable = false, -- Disable all diagnostics from lua_ls
+                -- globals = { "vim" },
+            },
+            workspace = {
+                library = {
+                    vim.fn.expand("$VIMRUNTIME/lua"),
+                    vim.fn.expand("$VIMRUNTIME/lua/vim/lsp"),
+                    vim.fn.stdpath("data") .. "/lazy/ui/nvchad_types",
+                    vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy",
+                    "${3rd}/love2d/library",
+                },
+                maxPreload = 100000,
+                preloadFileSize = 10000,
+            },
+        },
+    },
+})
+```
