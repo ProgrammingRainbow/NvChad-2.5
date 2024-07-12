@@ -161,6 +161,7 @@ Set filetype.
 :set filetype=fish
 ```
 ## Setup LSPConfig.
+Edit file `~/.config/nvim/lua/plugins/init.lua`. \
 Under Treesitter add an lspconfig entry.
 ```
     {
@@ -172,6 +173,7 @@ Under Treesitter add an lspconfig entry.
         end,
     },
 ```
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
 We will be adding a table that has a list of all servers configured. \
 This will be used later in the mason-lspconfig to automate there installation. \
 Then we will have a simple default_servers table for looping and setting up default configs. \
@@ -226,5 +228,46 @@ require("lspconfig").lua_ls.setup({
             },
         },
     },
+})
+```
+## Setting up Linting.
+Edit file `~/.config/nvim/lua/plugins/init.lua`. \
+Between LSPConfig and Confom add an entry for Linting.
+```
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            require("configs.lint")
+        end,
+    },
+```
+Create file `~/.config/nvim/lua/configs/lint.lua`. \
+`lint.linters_by_ft` is a key, value table for all linters to be configured. \
+`lint.linters.laucheck.args = {` Will over write the arguments table for luacheck. \
+To get the default args before editing use this command \
+`:lua print(vim.inspect(require('lint').linters.luacheck.args))`.
+```
+local lint = require("lint")
+
+lint.linters_by_ft = {
+    lua = { "luacheck" },
+}
+
+lint.linters.luacheck.args = {
+    "--globals",
+    "love",
+    "vim",
+    "--formatter",
+    "plain",
+    "--codes",
+    "--ranges",
+    "-",
+}
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    callback = function()
+        lint.try_lint()
+    end,
 })
 ```
