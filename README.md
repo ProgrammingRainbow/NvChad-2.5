@@ -161,6 +161,7 @@ Set filetype.
 :set filetype=fish
 ```
 ## Setup LSPConfig.
+https://github.com/neovim/nvim-lspconfig \
 Edit file `~/.config/nvim/lua/plugins/init.lua`. \
 Under Treesitter add an lspconfig entry.
 ```
@@ -231,6 +232,7 @@ require("lspconfig").lua_ls.setup({
 })
 ```
 ## Setting up Linting.
+https://github.com/mfussenegger/nvim-lint \
 Edit file `~/.config/nvim/lua/plugins/init.lua`. \
 Between LSPConfig and Confom add an entry for Linting.
 ```
@@ -270,5 +272,121 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
     callback = function()
         lint.try_lint()
     end,
+})
+```
+## Setting up mason-conform.
+https://github.com/zapling/mason-conform.nvim \
+Edit the file `~/.config/nvim/lua/plugins/init.lua`. \
+Below the conform entry add mason-conform.
+```
+    {
+        "zapling/mason-conform.nvim",
+        event = "VeryLazy",
+        dependencies = { "conform.nvim" },
+        config = function()
+            require("configs.mason-conform")
+        end,
+    },
+```
+Create the file `~/.config/nvim/lua/configs/mason-conform.lua`. \
+Any formatters you don't wish to auto install add to ignore_install table.
+```
+require("mason-conform").setup({
+    -- List of formatters to ignore during install
+    ignore_install = {},
+})
+```
+## Setting up mason-lspconfig.
+https://github.com/williamboman/mason-lspconfig.nvim \
+Edit the file `~/.config/nvim/lua/plugins/init.lua`. \
+Below the lspconfig entry add mason-lspconfig.
+```
+    {
+        "williamboman/mason-lspconfig.nvim",
+        event = "VeryLazy",
+        dependencies = { "nvim-lspconfig" },
+        config = function()
+            require("configs.mason-lspconfig")
+        end,
+    },
+```
+Create the file `~/.config/nvim/lua/configs/mason-lspconfig.lua`. \
+This entire file is simply creating a table of servers to pass into ensure_installed. \
+There is also a table at the top to add any server that should not be installed.
+```
+local lspconfig = package.loaded["lspconfig"]
+
+-- List of servers to ignore during install
+local ignore_install = {}
+
+-- Helper function to find if value is in table.
+local function table_contains(table, value)
+    for _, v in ipairs(table) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+-- Build a list of lsp servers to install minus the ignored list.
+local all_servers = {}
+for _, s in ipairs(lspconfig.servers) do
+    if not table_contains(ignore_install, s) then
+        table.insert(all_servers, s)
+    end
+end
+
+require("mason-lspconfig").setup({
+    ensure_installed = all_servers,
+    automatic_installation = false,
+})
+```
+## Setting up mason-lint.
+https://github.com/rshkarin/mason-nvim-lint \
+Edit the file `~/.config/nvim/lua/plugins/init.lua`. \
+Below the lint entry add mason-lint.
+```
+    {
+        "rshkarin/mason-nvim-lint",
+        event = "VeryLazy",
+        dependencies = { "nvim-lint" },
+        config = function()
+            require("configs.mason-lint")
+        end,
+    },
+```
+Create the file `~/.config/nvim/lua/configs/mason-lint.lua`. \
+This entire file is simply creating a table of linters to pass into ensure_installed. \
+There is also a table at the top to add any linter that should not be installed.
+```
+local lint = package.loaded["lint"]
+
+-- List of linters to ignore during install
+local ignore_install = {}
+
+-- Helper function to find if value is in table.
+local function table_contains(table, value)
+    for _, v in ipairs(table) do
+        if v == value then
+            return true
+        end
+    end
+    return false
+end
+
+-- Build a list of linters to install minus the ignored list.
+local all_linters = {}
+for _, v in pairs(lint.linters_by_ft) do
+    for _, linter in ipairs(v) do
+        if not table_contains(ignore_install, linter) then
+            table.insert(all_linters, linter)
+        end
+    end
+end
+
+require("mason-nvim-lint").setup({
+    ensure_installed = all_linters,
+    automatic_installation = false,
 })
 ```
