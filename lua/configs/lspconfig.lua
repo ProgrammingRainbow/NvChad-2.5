@@ -21,7 +21,7 @@ for _, lsp in ipairs(default_servers) do
     })
 end
 
-require("lspconfig").lua_ls.setup({
+lspconfig.lua_ls.setup({
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
