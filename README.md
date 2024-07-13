@@ -87,11 +87,11 @@ Added to the Top of `~/.config/nvim/lua/plugins/init.lua`.
         "nvim-treesitter/nvim-treesitter",
         event = { "BufReadPre", "BufNewFile" },
         config = function()
-            require("configs.nvim-treesitter")
+            require("configs.treesitter")
         end,
     },
 ```
-Create file `~/.config/nvim/lua/configs/nvim-treesitter.lua`. \
+Create file `~/.config/nvim/lua/configs/treesitter.lua`. \
 Copy from the internal one.
 https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/configs/treesitter.lua
 ```
