@@ -23,11 +23,10 @@ for _, lsp in ipairs(default_servers) do
 end
 
 -- lspconfig.clangd.setup({
---     on_attach = function(client, bufnr)
---         client.server_capabilities.signatureHelpProvider = false
+--     on_attach = function(client)
 --         client.server_capabilities.documentFormattingProvider = false
 --         client.server_capabilities.documentRangeFormattingProvider = false
---         on_attach(client, bufnr)
+--         on_attach(client)
 --     end,
 --     on_init = on_init,
 --     capabilities = capabilities,
