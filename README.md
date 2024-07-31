@@ -409,11 +409,10 @@ lspconfig.servers = {
 Add a setup for clangd. This prevents a bug and also disables formatting.
 ```
 lspconfig.clangd.setup({
-    on_attach = function(client, bufnr)
-        client.server_capabilities.signatureHelpProvider = false
+    on_attach = function(client)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-        on_attach(client, bufnr)
+        on_attach(client)
     end,
     on_init = on_init,
     capabilities = capabilities,
@@ -423,15 +422,32 @@ lspconfig.clangd.setup({
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
 Add a c entry to formatters_by_ft. It can only be configured with clang_format. But the package to be downloaded is clang-format. A work around is to used _ as to get the package installed.
 ```
-_ = { "clang-format" },
-c = { "clang_format" },
-cpp = { "clang_format" },
+        c_cpp = { "clang-format" }, -- Hack to force download.
+        c = { "clang_format" },
+        cpp = { "clang_format" },
 ```
 Between formatters_by_ft and format_on_save tables add. This sets tab spacing to 4. The default is 2.
 ```
     formatters = {
         clang_format = {
-            prepend_args = { "-style={ IndentWidth: 4, TabWidth: 4, UseTab: Never }" },
+            prepend_args = {
+                "-style={ \
+                IndentWidth: 4, \
+                TabWidth: 4, \
+                UseTab: Never, \
+                AccessModifierOffset: 0, \
+                IndentAccessModifiers: true, \
+                PackConstructorInitializers: Never}",
+            },
         },
     },
+```
+## treesitter
+Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
+Add syntax highlighting for c, c++, make and cmake.
+```
+        "c",
+        "cmake",
+        "cpp",
+        "make",
 ```
