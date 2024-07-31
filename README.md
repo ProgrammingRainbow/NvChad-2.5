@@ -396,3 +396,40 @@ require("mason-nvim-lint").setup({
     automatic_installation = false,
 })
 ```
+# C and C++
+## lspconfig
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
+Add `"clangd",` to lspconfig.servers.
+```
+lspconfig.servers = {
+    "lua_ls",
+    "clangd",
+}
+```
+Add a setup for clangd. This prevents a bug and also disables formatting.
+```
+lspconfig.clangd.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.signatureHelpProvider = false
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+})
+```
+## conform
+Edit file `~/.config/nvim/lua/configs/conform.lua`. \
+Add a c entry to formatters_by_ft. It can only be configured with clang_format. But the package to be downloaded is clang-format. So this is a hack and format may be running twice.
+```
+c = { "clang-format", "clang_format" },
+```
+Between formatters_by_ft and format_on_save tables add. This sets tab spacing to 4. The default is 2.
+```
+    formatters = {
+        clang_format = {
+            prepend_args = { "-style={ IndentWidth: 4, TabWidth: 4, UseTab: Never }" },
+        },
+    },
+```
