@@ -421,9 +421,11 @@ lspconfig.clangd.setup({
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add a c entry to formatters_by_ft. It can only be configured with clang_format. But the package to be downloaded is clang-format. So this is a hack and format may be running twice.
+Add a c entry to formatters_by_ft. It can only be configured with clang_format. But the package to be downloaded is clang-format. A work around is to used _ as to get the package installed.
 ```
-c = { "clang-format", "clang_format" },
+_ = { "clang-format" },
+c = { "clang_format" },
+cpp = { "clang_format" },
 ```
 Between formatters_by_ft and format_on_save tables add. This sets tab spacing to 4. The default is 2.
 ```
