@@ -522,7 +522,7 @@ Add Golang entries to formatters_by_ft.
         gowork = { "gofumpt", "goimports-reviser" },
         gotmpl = { "gofumpt", "goimports-reviser" },
 ```
-Between formatters_by_ft and format_on_save tables add.
+Between `formatters_by_ft` and `format_on_save` add entries to table `formatters`.
 ```
     formatters = {
         ["goimports-reviser"] = {
@@ -541,4 +541,52 @@ Add syntax highlighting for Golang, make and cmake.
         "gomod",
         "gosum",
         "gowork",
+```
+# Python
+## lspconfig
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
+Add `"pyright",` to `lspconfig.servers`.
+```
+    "pyright",
+```
+Add `"pyright"` to `default_servers`.
+```
+    "pyright",
+```
+## conform
+Edit file `~/.config/nvim/lua/configs/conform.lua`. \
+Add `python` `entries to formatters_by_ft` for isort and black.
+```
+        python = { "isort", "black" },
+```
+Between `formatters_by_ft` and `format_on_save` add entries to table `formatters`. \
+Try to speed up black and to to make isort play better wtih black.
+```
+    formatters = {
+        -- Python
+        black = {
+            prepend_args = {
+                "--fast",
+            },
+        },
+        isort = {
+            prepend_args = {
+                "--profile",
+                "black",
+            },
+        },
+    },
+```
+## linting
+Edit file `~/.config/nvim/lua/configs/lint.lua`. \
+Add a python flake8 entry to `linters_by_ft` table.
+```
+    python = { "flake8" },
+}
+```
+## treesitter
+Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
+Add syntax highlighting for Python.
+```
+        "python",
 ```
