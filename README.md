@@ -418,6 +418,13 @@ and
 ```
         ["clang-format"] = {
 ```
+In `~/.config/nvim/lua/configs/lspconfig.lua`. The on_attach function takes client and bufnr parameters. It has almost no documentations and i have no idea if leaving it off affects anything. But it appears it should be provided.
+```
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+```
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
 Add `"clangd",` to lspconfig.servers.
@@ -430,10 +437,10 @@ lspconfig.servers = {
 Add a setup for clangd. This disables formatting.
 ```
 lspconfig.clangd.setup({
-    on_attach = function(client)
+    on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
-        on_attach(client)
+        on_attach(client, bufnr)
     end,
     on_init = on_init,
     capabilities = capabilities,
