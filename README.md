@@ -397,6 +397,27 @@ require("mason-nvim-lint").setup({
 })
 ```
 # C and C++
+## UPDATE
+I have changed the hack that was in place for clang_format since the video. \
+Change file `~/.config/nvim/lua/configs/conform.lua`.
+```
+        c_cpp = { "clang-format" }, -- Hack to force download.
+        c = { "clang_format" },
+        cpp = { "clang_format" },
+```
+and
+```
+        clang_format = {
+```
+The a simpler way.
+```
+        c = { "clang-format" },
+        cpp = { "clang-format" },
+```
+and
+```
+        ["clang-format"] = {
+```
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
 Add `"clangd",` to lspconfig.servers.
@@ -406,7 +427,7 @@ lspconfig.servers = {
     "clangd",
 }
 ```
-Add a setup for clangd. This prevents a bug and also disables formatting.
+Add a setup for clangd. This disables formatting.
 ```
 lspconfig.clangd.setup({
     on_attach = function(client)
@@ -420,16 +441,15 @@ lspconfig.clangd.setup({
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add a c entry to formatters_by_ft. It can only be configured with clang_format. But the package to be downloaded is clang-format. A work around is to used _ as to get the package installed.
+Add a C and C++ entry to formatters_by_ft.
 ```
-        c_cpp = { "clang-format" }, -- Hack to force download.
-        c = { "clang_format" },
-        cpp = { "clang_format" },
+        c = { "clang-format" },
+        cpp = { "clang-format" },
 ```
 Between formatters_by_ft and format_on_save tables add. This sets tab spacing to 4. The default is 2.
 ```
     formatters = {
-        clang_format = {
+        ["clang-format"] = {
             prepend_args = {
                 "-style={ \
                 IndentWidth: 4, \
@@ -450,4 +470,68 @@ Add syntax highlighting for c, c++, make and cmake.
         "cmake",
         "cpp",
         "make",
+```
+# Golang
+## lspconfig
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
+Add `"gopls",` to lspconfig.servers.
+```
+lspconfig.servers = {
+    "lua_ls",
+    "gopls",
+}
+```
+Add a setup for gopls. This disables formatting and adds some linting options.
+```
+lspconfig.gopls.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+    cmd = { "gopls" },
+    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+    settings = {
+        gopls = {
+            analyses = {
+                unusedparams = true,
+            },
+            completeUnimported = true,
+            usePlaceholders = true,
+            staticcheck = true,
+        },
+    },
+})
+```
+## conform
+Edit file `~/.config/nvim/lua/configs/conform.lua`. \
+Add a go entries to formatters_by_ft.
+```
+        go = { "gofumpt", "goimports-reviser", "golines" },
+        gomod = { "gofumpt", "goimports-reviser" },
+        gowork = { "gofumpt", "goimports-reviser" },
+        gotmpl = { "gofumpt", "goimports-reviser" },
+```
+Between formatters_by_ft and format_on_save tables add.
+```
+    formatters = {
+        ["goimports-reviser"] = {
+            prepend_args = { "-rm-unused" },
+        },
+        golines = {
+            prepend_args = { "--max-len=80" },
+        },
+    },
+```
+## treesitter
+Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
+Add syntax highlighting for Golang, make and cmake.
+```
+        "go",
+        "gomod",
+        "gosum",
+        "gowork",
 ```
