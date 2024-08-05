@@ -1,22 +1,31 @@
 local options = {
     formatters_by_ft = {
         lua = { "stylua" },
-        -- c_cpp = { "clang-format" }, -- Hack to force download.
-        -- c = { "clang_format" },
-        -- cpp = { "clang_format" },
+        -- c = { "clang-format" },
+        -- cpp = { "clang-format" },
+        -- go = { "gofumpt", "goimports-reviser", "golines" },
+        -- gomod = { "gofumpt", "goimports-reviser" },
+        -- gowork = { "gofumpt", "goimports-reviser" },
+        -- gotmpl = { "gofumpt", "goimports-reviser" },
     },
 
     -- formatters = {
-    --     clang_format = {
+    --     ["clang-format"] = {
     --         prepend_args = {
     --             "-style={ \
-    --             IndentWidth: 4, \
-    --             TabWidth: 4, \
-    --             UseTab: Never, \
-    --             AccessModifierOffset: 0, \
-    --             IndentAccessModifiers: true, \
-    --             PackConstructorInitializers: Never}",
+    --                 IndentWidth: 4, \
+    --                 TabWidth: 4, \
+    --                 UseTab: Never, \
+    --                 AccessModifierOffset: 0, \
+    --                 IndentAccessModifiers: true, \
+    --                 PackConstructorInitializers: Never}",
     --         },
+    --     },
+    --     ["goimports-reviser"] = {
+    --         prepend_args = { "-rm-unused" },
+    --     },
+    --     golines = {
+    --         prepend_args = { "--max-len=80" },
     --     },
     -- },
 

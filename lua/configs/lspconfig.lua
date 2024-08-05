@@ -8,6 +8,7 @@ local lspconfig = require("lspconfig")
 lspconfig.servers = {
     "lua_ls",
     -- "clangd",
+    -- "gopls",
 }
 
 -- list of servers configured with default config.
@@ -23,13 +24,36 @@ for _, lsp in ipairs(default_servers) do
 end
 
 -- lspconfig.clangd.setup({
---     on_attach = function(client)
+--     on_attach = function(client, bufnr)
 --         client.server_capabilities.documentFormattingProvider = false
 --         client.server_capabilities.documentRangeFormattingProvider = false
---         on_attach(client)
+--         on_attach(client, bufnr)
 --     end,
 --     on_init = on_init,
 --     capabilities = capabilities,
+-- })
+
+-- lspconfig.gopls.setup({
+--     on_attach = function(client, bufnr)
+--         client.server_capabilities.documentFormattingProvider = false
+--         client.server_capabilities.documentRangeFormattingProvider = false
+--         on_attach(client, bufnr)
+--     end,
+--     on_init = on_init,
+--     capabilities = capabilities,
+--     cmd = { "gopls" },
+--     filetypes = { "go", "gomod", "gowork", "gotmpl" },
+--     root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+--     settings = {
+--         gopls = {
+--             analyses = {
+--                 unusedparams = true,
+--             },
+--             completeUnimported = true,
+--             usePlaceholders = true,
+--             staticcheck = true,
+--         },
+--     },
 -- })
 
 lspconfig.lua_ls.setup({
