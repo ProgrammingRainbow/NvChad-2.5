@@ -508,7 +508,7 @@ lspconfig.gopls.setup({
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add a go entries to formatters_by_ft.
+Add Golang entries to formatters_by_ft.
 ```
         go = { "gofumpt", "goimports-reviser", "golines" },
         gomod = { "gofumpt", "goimports-reviser" },
