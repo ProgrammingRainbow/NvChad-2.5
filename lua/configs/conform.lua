@@ -7,27 +7,42 @@ local options = {
         -- gomod = { "gofumpt", "goimports-reviser" },
         -- gowork = { "gofumpt", "goimports-reviser" },
         -- gotmpl = { "gofumpt", "goimports-reviser" },
+        -- python = { "isort", "black" },
     },
 
-    -- formatters = {
-    --     ["clang-format"] = {
-    --         prepend_args = {
-    --             "-style={ \
-    --                 IndentWidth: 4, \
-    --                 TabWidth: 4, \
-    --                 UseTab: Never, \
-    --                 AccessModifierOffset: 0, \
-    --                 IndentAccessModifiers: true, \
-    --                 PackConstructorInitializers: Never}",
-    --         },
-    --     },
-    --     ["goimports-reviser"] = {
-    --         prepend_args = { "-rm-unused" },
-    --     },
-    --     golines = {
-    --         prepend_args = { "--max-len=80" },
-    --     },
-    -- },
+    formatters = {
+        -- -- C & C++
+        -- ["clang-format"] = {
+        --     prepend_args = {
+        --         "-style={ \
+        --                 IndentWidth: 4, \
+        --                 TabWidth: 4, \
+        --                 UseTab: Never, \
+        --                 AccessModifierOffset: 0, \
+        --                 IndentAccessModifiers: true, \
+        --                 PackConstructorInitializers: Never}",
+        --     },
+        -- },
+        -- -- Golang
+        -- ["goimports-reviser"] = {
+        --     prepend_args = { "-rm-unused" },
+        -- },
+        -- golines = {
+        --     prepend_args = { "--max-len=80" },
+        -- },
+        -- -- Python
+        -- black = {
+        --     prepend_args = {
+        --         "--fast",
+        --     },
+        -- },
+        -- isort = {
+        --     prepend_args = {
+        --         "--profile",
+        --         "black",
+        --     },
+        -- },
+    },
 
     format_on_save = {
         -- These options will be passed to conform.format()
