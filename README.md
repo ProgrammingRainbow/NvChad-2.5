@@ -582,7 +582,6 @@ Edit file `~/.config/nvim/lua/configs/lint.lua`. \
 Add a python flake8 entry to `linters_by_ft` table.
 ```
     python = { "flake8" },
-}
 ```
 ## treesitter
 Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
