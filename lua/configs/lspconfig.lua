@@ -45,7 +45,7 @@ end
 --     on_init = on_init,
 --     capabilities = capabilities,
 --     cmd = { "gopls" },
---     filetypes = { "go", "gomod", "gowork", "gotmpl" },
+--     filetypes = { "go", "gomod", "gotmpl", "gowork" },
 --     root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
 --     settings = {
 --         gopls = {
