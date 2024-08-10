@@ -4,9 +4,6 @@ local options = {
         -- c = { "clang-format" },
         -- cpp = { "clang-format" },
         -- go = { "gofumpt", "goimports-reviser", "golines" },
-        -- gomod = { "gofumpt", "goimports-reviser" },
-        -- gowork = { "gofumpt", "goimports-reviser" },
-        -- gotmpl = { "gofumpt", "goimports-reviser" },
         -- python = { "isort", "black" },
     },
 
