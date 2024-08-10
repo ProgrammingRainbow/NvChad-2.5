@@ -480,7 +480,7 @@ Add syntax highlighting for c, c++, make and cmake.
 ```
 # Golang
 ## UPDATE
-I think all the formatters for Go only apply to actual .go files. So all non Go filetypes are removed from `conform.lua`.
+I think all the formatters for Go only apply to actual .go files. So all non Go filetypes have been removed from `conform.lua`.
 In `treesitter.lua` gotmpl has been added.
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
