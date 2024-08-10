@@ -8,6 +8,7 @@ local options = {
         -- "go",
         -- "gomod",
         -- "gosum",
+        -- "gotmpl",
         -- "gowork",
         "lua",
         "luadoc",
