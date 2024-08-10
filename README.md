@@ -479,6 +479,9 @@ Add syntax highlighting for c, c++, make and cmake.
         "make",
 ```
 # Golang
+## UPDATE
+I think all the formatters for Go only apply to actual .go files. So all non Go filetypes are removed from `conform.lua`.
+In `treesitter.lua` gotmpl has been added.
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
 Add `"gopls",` to lspconfig.servers.
@@ -499,7 +502,7 @@ lspconfig.gopls.setup({
     on_init = on_init,
     capabilities = capabilities,
     cmd = { "gopls" },
-    filetypes = { "go", "gomod", "gowork", "gotmpl" },
+    filetypes = { "go", "gomod", "gotmpl", "gowork" },
     root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
     settings = {
         gopls = {
@@ -515,12 +518,9 @@ lspconfig.gopls.setup({
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add Golang entries to formatters_by_ft.
+Add Golang entry to formatters_by_ft.
 ```
         go = { "gofumpt", "goimports-reviser", "golines" },
-        gomod = { "gofumpt", "goimports-reviser" },
-        gowork = { "gofumpt", "goimports-reviser" },
-        gotmpl = { "gofumpt", "goimports-reviser" },
 ```
 Between `formatters_by_ft` and `format_on_save` add entries to table `formatters`.
 ```
@@ -535,11 +535,12 @@ Between `formatters_by_ft` and `format_on_save` add entries to table `formatters
 ```
 ## treesitter
 Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
-Add syntax highlighting for Golang, make and cmake.
+Add syntax highlighting for Go related filetypes.
 ```
         "go",
         "gomod",
         "gosum",
+        "gotmpl",
         "gowork",
 ```
 # Python
