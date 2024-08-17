@@ -568,6 +568,8 @@ Try to speed up black and to to make isort play better wtih black.
         black = {
             prepend_args = {
                 "--fast",
+                "--line-length",
+                "80",
             },
         },
         isort = {
