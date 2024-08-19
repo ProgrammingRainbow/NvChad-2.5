@@ -621,7 +621,7 @@ lspconfig.pyright.setup({
     settings = {
         python = {
             analysis = {
-                typeCheckingMode = "off", -- Disable type checking diagnostics (handl
+                typeCheckingMode = "off", -- Disable type checking diagnostics
             },
         },
     },
