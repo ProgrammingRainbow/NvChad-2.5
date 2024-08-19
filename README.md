@@ -697,7 +697,7 @@ we need an entry for both nvim-nio and nvim-dap-ui. Dap UI depends on both nvim-
             "nvim-neotest/nvim-nio",
         },
         config = function()
-            require("dap-ui")
+            require("configs.dap-ui")
         end,
     },
 ```
