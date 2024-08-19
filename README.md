@@ -675,11 +675,19 @@ Create `~/.config/nvim/lua/configs/dap.lua`. \
 We are adding a leader + d + b key mapping to set a breakpoint. This key mapping is only set when dap is loaded that's why it's not in mappings.lua
 ```
 local map = vim.keymap.set
+
 map(
     "n",
     "<leader>db",
     "<cmd> DapToggleBreakpoint <CR>",
     { desc = "Toggle DAP Breakpoint" }
+)
+
+map(
+    "n",
+    "<leader>dr",
+    "<cmd> DapContinue <CR>",
+    { desc = "Start or continue DAP" }
 )
 ```
 ## dap-ui
@@ -706,13 +714,25 @@ Create `~/.config/nvim/lua/configs/dap-ui.lua`.
 local dap = require("dap")
 local dapui = require("dapui")
 dapui.setup()
-dap.listeners.after.event_initialized["dapui_config"] = function()
+
+local map = vim.keymap.set
+map(
+    "n",
+    "<leader>du",
+    "<cmd>lua require('dapui').toggle()<CR>",
+    { desc = "Toggle DAP UI" }
+)
+
+dap.listeners.after.attach.dapui_config = function()
     dapui.open()
 end
-dap.listeners.before.event_terminated["dapui_config"] = function()
+dap.listeners.after.launch.dapui_config = function()
+    dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
     dapui.close()
 end
-dap.listeners.before.event_exited["dapui_config"] = function()
+dap.listeners.before.event_exited.dapui_config = function()
     dapui.close()
 end
 ```
