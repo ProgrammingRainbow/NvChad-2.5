@@ -592,3 +592,175 @@ Add syntax highlighting for Python.
 ```
         "python",
 ```
+
+
+
+
+
+
+
+# Python (Dreams of Code)
+## lspconfig
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
+Add `"pyright",` to `lspconfig.servers`.
+```
+    "pyright",
+```
+Choose default or choose to disable type checks for pyright. \
+(Choice 1) For default add `"pyright"` to `default_servers`.
+```
+    "pyright",
+```
+(Choice 2) Or to prevent duplicate linting from pyright and mypy add the following. This will not stop pyright unused variable hits. I was unable to turn this off.
+```
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    on_init = on_init,
+    capabilities = capabilities,
+
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = "off", -- Disable type checking diagnostics (handl
+            },
+        },
+    },
+})
+```
+## conform
+Edit file `~/.config/nvim/lua/configs/conform.lua`. \
+Add `python` `entries to formatters_by_ft` for isort and black.
+```
+        python = { "black" },
+```
+(Optional) Between `formatters_by_ft` and `format_on_save` add entries to table `formatters`. \
+Try to speed up black and to to make isort play better wtih black.
+```
+    formatters = {
+        -- Python
+        black = {
+            prepend_args = {
+                "--fast",
+                "--line-length",
+                "80",
+            },
+        },
+    },
+```
+## linting
+Edit file `~/.config/nvim/lua/configs/lint.lua`. \
+Add a python mypy and ruff entries to `linters_by_ft` table.
+```
+    python = { "mypy", "ruff" },
+```
+## treesitter
+Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
+Add syntax highlighting for Python.
+```
+        "python",
+```
+## dap
+Edit file `~/.config/nvim/lua/plugins/init.lua`. \
+We will add the entry for nvim-dap and also load it's config from `configs/dap.lua`
+```
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            require("configs.dap")
+        end,
+    },
+```
+
+Create `~/.config/nvim/lua/configs/dap.lua`. \
+We are adding a leader + d + b key mapping to set a breakpoint. This key mapping is only set when dap is loaded that's why it's not in mappings.lua
+```
+local map = vim.keymap.set
+map(
+    "n",
+    "<leader>db",
+    "<cmd> DapToggleBreakpoint <CR>",
+    { desc = "Toggle DAP Breakpoint" }
+)
+```
+## dap-ui
+Edit file `~/.config/nvim/lua/plugins/init.lua`. \
+we need an entry for both nvim-nio and nvim-dap-ui. Dap UI depends on both nvim-dap and nvim-nio. We will load it's configuration from `configs/dap-ui.lua`
+```
+    {
+        "nvim-neotest/nvim-nio",
+    },
+
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "nvim-neotest/nvim-nio",
+        },
+        config = function()
+            require("dap-ui")
+        end,
+    },
+```
+Create `~/.config/nvim/lua/configs/dap-ui.lua`.
+```
+local dap = require("dap")
+local dapui = require("dapui")
+dapui.setup()
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dapui.close()
+end
+```
+## dap-python
+Edit file `~/.config/nvim/lua/plugins/init.lua`. \
+We will have this load when `python` files are loaded. We will load it's configurations from `configs/dap-python.lua`.
+```
+    {
+        "mfussenegger/nvim-dap-python",
+        ft = "python",
+        dependencies = {
+            "mfussenegger/nvim-dap",
+            "rcarriga/nvim-dap-ui",
+        },
+        config = function()
+            require("configs.dap-python")
+        end,
+    },
+```
+Create `~/.config/nvim/lua/configs/dap-python.lua`. \
+We are setting the path to debugpy and passing that to the dap-python setup. We are also setting up key mappings that will only be loaded when `nvim-dap-python` is loaded.
+```
+local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+require("dap-python").setup(path)
+
+local map = vim.keymap.set
+
+map("n", "<leader>dpr", function()
+    require("dap-python").test_method()
+end, { desc = "Run DAP Python test method" })
+```
+## mason-nvim-dap
+Edit file `~/.config/nvim/lua/plugins/init.lua`. \
+We will used `mason-nvim-dap` to automagicly install debugpy. We will set it's loading to verylazy so it doesn't slowdown nvim startup time. It will also load its config from `configs/mason-dap.lua`
+```
+    {
+        "jay-babu/mason-nvim-dap.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("configs.mason-dap")
+        end,
+    },
+```
+Create `~/.config/nvim/lua/configs/mason-dap.lua`. \
+This mason-nvim-dap like other similar packages doesn't actually load it's packages on demand so we will just put the package into the ensured installed. Debugpy is actually refered to as `python`. Any package that is being installed automatically that you don't want to, can be added into the exclude table.
+```
+require("mason-nvim-dap").setup({
+    ensure_installed = { "python" },
+    automatic_installation = { exclude = {} },
+})
+```
