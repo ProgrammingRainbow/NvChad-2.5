@@ -592,13 +592,6 @@ Add syntax highlighting for Python.
 ```
         "python",
 ```
-
-
-
-
-
-
-
 # Python (Dreams of Code)
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -778,6 +771,28 @@ We will used `mason-nvim-dap` to automagicly install debugpy. We will set it's l
 ```
 Create `~/.config/nvim/lua/configs/mason-dap.lua`. \
 This mason-nvim-dap like other similar packages doesn't actually load it's packages on demand so we will just put the package into the ensured installed. Debugpy is actually refered to as `python`. Any package that is being installed automatically that you don't want to, can be added into the exclude table.
+```
+require("mason-nvim-dap").setup({
+    ensure_installed = { "python" },
+    automatic_installation = { exclude = {} },
+})
+```
+# Odin
+## lspconfig
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
+Add `"ols",` to `lspconfig.servers`.
+```
+    "ols",
+```
+Add `"ols"` to `default_servers`.
+```
+    "ols",
+```
+## treesitter
+Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
+Add syntax highlighting for Odin.
+```
+        "odin",
 ```
 require("mason-nvim-dap").setup({
     ensure_installed = { "python" },
