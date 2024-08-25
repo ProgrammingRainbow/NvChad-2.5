@@ -794,8 +794,3 @@ Add syntax highlighting for Odin.
 ```
         "odin",
 ```
-require("mason-nvim-dap").setup({
-    ensure_installed = { "python" },
-    automatic_installation = { exclude = {} },
-})
-```
