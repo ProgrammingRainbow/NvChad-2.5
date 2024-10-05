@@ -622,7 +622,7 @@ lspconfig.pyright.setup({
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add `python` `entries to formatters_by_ft` for isort and black.
+Add a `python` entry to `formatters_by_ft` for isort and black.
 ```
         python = { "black" },
 ```
@@ -793,4 +793,38 @@ Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
 Add syntax highlighting for Odin.
 ```
         "odin",
+```
+# Haskell
+## lspconfig
+Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
+Add the haskell-language-server `"hls",` to `lspconfig.servers`. Unless it's installed on your system.
+```
+    "hls",
+```
+Add `"hls"` to `default_servers`.
+```
+    "hls",
+```
+## linting
+Edit file `~/.config/nvim/lua/configs/lint.lua`. \
+Add a hlint entry to `linters_by_ft` table.
+```
+    haskell = { "hlint" },
+```
+## conform
+Edit file `~/.config/nvim/lua/configs/conform.lua`. \
+Add an entry to `formatters_by_ft` for ormolu or fourmolu.
+Four spaces the right choice.
+```
+        haskell = { "fourmolu" },
+```
+Two spaces the wrong choice.
+```
+        haskell = { "ormolu" },
+```
+## treesitter
+Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
+Add syntax highlighting for Odin.
+```
+        "haskell",
 ```
