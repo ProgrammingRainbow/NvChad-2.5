@@ -813,7 +813,7 @@ Add a hlint entry to `linters_by_ft` table.
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add an entry to `formatters_by_ft` for ormolu or fourmolu.
+Add an entry to `formatters_by_ft` for ormolu or fourmolu. \
 Four spaces the right choice.
 ```
         haskell = { "fourmolu" },
