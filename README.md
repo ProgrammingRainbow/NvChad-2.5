@@ -807,9 +807,17 @@ Add the haskell-language-server `"hls",` to `lspconfig.servers`. Unless it's ins
 ```
     "hls",
 ```
-Add `"hls"` to `default_servers`.
+Add a setup for hls. This disables formatting.
 ```
-    "hls",
+lspconfig.hls.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+})
 ```
 ## linting
 Edit file `~/.config/nvim/lua/configs/lint.lua`. \
@@ -819,18 +827,18 @@ Add a hlint entry to `linters_by_ft` table.
 ```
 ## conform
 Edit file `~/.config/nvim/lua/configs/conform.lua`. \
-Add an entry to `formatters_by_ft` for ormolu or fourmolu. \
+Add an entry to `formatters_by_ft` for ormolu or fourmolu. Also add stylish-haskell.\
 Four spaces the right choice.
 ```
-        haskell = { "fourmolu" },
+        haskell = { "fourmolu", "stylish-haskell" },
 ```
 Two spaces the wrong choice.
 ```
-        haskell = { "ormolu" },
+        haskell = { "ormolu", "stylish-haskell" },
 ```
 ## treesitter
 Edit file `~/.config/nvim/lua/configs/treesitter.lua`. \
-Add syntax highlighting for Odin.
+Add syntax highlighting for Haskell.
 ```
         "haskell",
 ```
