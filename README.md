@@ -1,4 +1,4 @@
-![Screenshot](screenshot.png)
+![Screenshot](nvchad-neovim.png)
 
 # Installing NvChad Version 2.5
 ## Backup and remove old nvim config.
@@ -396,6 +396,7 @@ require("mason-nvim-lint").setup({
     automatic_installation = false,
 })
 ```
+![Screenshot](nvchad-cpp.png)
 # C and C++
 ## UPDATE
 I have changed the hack that was in place for clang_format since the video. \
@@ -478,6 +479,7 @@ Add syntax highlighting for c, c++, make and cmake.
         "cpp",
         "make",
 ```
+![Screenshot](nvchad-go.png)
 # Golang
 ## UPDATE
 I think all the formatters for Go only apply to actual .go files. So all non Go filetypes have been removed from `conform.lua`.
@@ -543,6 +545,7 @@ Add syntax highlighting for Go related filetypes.
         "gotmpl",
         "gowork",
 ```
+![Screenshot](nvchad-python.png)
 # Python
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -592,6 +595,7 @@ Add syntax highlighting for Python.
 ```
         "python",
 ```
+![Screenshot](nvchad-python-doc.png)
 # Python (Dreams of Code)
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -777,6 +781,7 @@ require("mason-nvim-dap").setup({
     automatic_installation = { exclude = {} },
 })
 ```
+![Screenshot](nvchad-odin.png)
 # Odin
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -794,6 +799,7 @@ Add syntax highlighting for Odin.
 ```
         "odin",
 ```
+![Screenshot](nvchad-haskell.png)
 # Haskell
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
