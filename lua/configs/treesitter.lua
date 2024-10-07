@@ -15,6 +15,7 @@ local options = {
         "luadoc",
         -- "make",
         "markdown",
+        -- "odin",
         "printf",
         -- "python",
         "toml",
