@@ -16,7 +16,6 @@ lspconfig.servers = {
 
 -- list of servers configured with default config.
 local default_servers = {
-    -- "hls",
     -- "ols",
     -- "pyright",
 }
@@ -61,6 +60,17 @@ end
 --             staticcheck = true,
 --         },
 --     },
+-- })
+
+-- lspconfig.hls.setup({
+--     on_attach = function(client, bufnr)
+--         client.server_capabilities.documentFormattingProvider = false
+--         client.server_capabilities.documentRangeFormattingProvider = false
+--         on_attach(client, bufnr)
+--     end,
+--
+--     on_init = on_init,
+--     capabilities = capabilities,
 -- })
 
 lspconfig.lua_ls.setup({
