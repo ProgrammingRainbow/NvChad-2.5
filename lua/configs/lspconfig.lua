@@ -10,12 +10,14 @@ lspconfig.servers = {
     -- "clangd",
     -- "gopls",
     -- "hls",
+    -- "ols",
     -- "pyright",
 }
 
 -- list of servers configured with default config.
 local default_servers = {
     -- "hls",
+    -- "ols",
     -- "pyright",
 }
 
