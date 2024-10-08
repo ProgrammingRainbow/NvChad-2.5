@@ -28,6 +28,11 @@ Or this already configured version
 ```
 git clone https://github.com/ProgrammingRainbow/NvChad-2.5 ~/.config/nvim && nvim
 ```
+You can safely remove the `.git` and image files.
+```
+rm-rf ~/.config/nvim/.git
+rm ~/.config/nvim/*.png
+```
 Edit the file `~/.config/nvim/lua/options.lua` to change tabs from 2 to 4 spaces. \
 Original config is here https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/options.lua
 ```
