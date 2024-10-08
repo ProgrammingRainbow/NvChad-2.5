@@ -481,6 +481,7 @@ Add syntax highlighting for c, c++, make and cmake.
         "make",
 ```
 ![Screenshot](nvchad-go.png)
+https://www.youtube.com/watch?v=1vK3VCfKEyQ
 # Golang
 ## UPDATE
 I think all the formatters for Go only apply to actual .go files. So all non Go filetypes have been removed from `conform.lua`.
@@ -547,6 +548,7 @@ Add syntax highlighting for Go related filetypes.
         "gowork",
 ```
 ![Screenshot](nvchad-python.png)
+https://www.youtube.com/watch?v=4o6D1W0iW10
 # Python
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -597,6 +599,7 @@ Add syntax highlighting for Python.
         "python",
 ```
 ![Screenshot](nvchad-python-doc.png)
+https://www.youtube.com/watch?v=m0OobzFjEKE
 # Python (Dreams of Code)
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -783,6 +786,7 @@ require("mason-nvim-dap").setup({
 })
 ```
 ![Screenshot](nvchad-odin.png)
+https://www.youtube.com/watch?v=-NMYeQGIN20
 # Odin
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
@@ -801,6 +805,7 @@ Add syntax highlighting for Odin.
         "odin",
 ```
 ![Screenshot](nvchad-haskell.png)
+https://www.youtube.com/watch?v=CcYQULn_M4s
 # Haskell
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
