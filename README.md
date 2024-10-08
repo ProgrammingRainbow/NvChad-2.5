@@ -1,5 +1,5 @@
 ![Screenshot](nvchad-neovim.png)
-
+https://www.youtube.com/watch?v=TNRFegMqbWA
 # Installing NvChad Version 2.5
 ## Backup and remove old nvim config.
 Backup old nvim config.
@@ -397,6 +397,7 @@ require("mason-nvim-lint").setup({
 })
 ```
 ![Screenshot](nvchad-cpp.png)
+https://www.youtube.com/watch?v=upeAH74q0q4
 # C and C++
 ## UPDATE
 I have changed the hack that was in place for clang_format since the video. \
