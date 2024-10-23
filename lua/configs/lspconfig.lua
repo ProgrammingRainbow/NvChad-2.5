@@ -7,7 +7,7 @@ local lspconfig = require("lspconfig")
 -- list of all servers configured.
 lspconfig.servers = {
     "lua_ls",
-    -- "clangd",
+    "clangd",
     -- "gopls",
     -- "hls",
     -- "ols",
@@ -29,15 +29,15 @@ for _, lsp in ipairs(default_servers) do
     })
 end
 
--- lspconfig.clangd.setup({
---     on_attach = function(client, bufnr)
---         client.server_capabilities.documentFormattingProvider = false
---         client.server_capabilities.documentRangeFormattingProvider = false
---         on_attach(client, bufnr)
---     end,
---     on_init = on_init,
---     capabilities = capabilities,
--- })
+lspconfig.clangd.setup({
+    on_attach = function(client, bufnr)
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+        on_attach(client, bufnr)
+    end,
+    on_init = on_init,
+    capabilities = capabilities,
+})
 
 -- lspconfig.gopls.setup({
 --     on_attach = function(client, bufnr)

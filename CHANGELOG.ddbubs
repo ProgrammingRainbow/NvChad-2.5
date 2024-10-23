@@ -1,0 +1,12 @@
+
+10-23-24
+ - Initial config
+ - Enabled treesitter for:
+   -- c 
+   -- bash
+   -- nix 
+   -- make
+   -- yaml
+   -- toml
+  - Enabled LSP for C 
+
