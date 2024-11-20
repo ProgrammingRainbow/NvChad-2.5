@@ -30,7 +30,7 @@ git clone https://github.com/ProgrammingRainbow/NvChad-2.5 ~/.config/nvim && nvi
 ```
 You can safely remove the `.git` and image files.
 ```
-rm-rf ~/.config/nvim/.git
+rm -rf ~/.config/nvim/.git
 rm ~/.config/nvim/*.png
 ```
 Edit the file `~/.config/nvim/lua/options.lua` to change tabs from 2 to 4 spaces. \
