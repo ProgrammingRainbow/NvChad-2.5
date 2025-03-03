@@ -485,6 +485,9 @@ Add syntax highlighting for c, c++, make and cmake.
 ![Screenshot](nvchad-go.png)
 https://www.youtube.com/watch?v=1vK3VCfKEyQ
 # Golang
+## Install Go before using Mason.
+Go needs to be installed in order for Mason to install the go packages.\
+On Archlinux BTW `sudo pacman -S --needed go`
 ## UPDATE
 I think all the formatters for Go only apply to actual .go files. So all non Go filetypes have been removed from `conform.lua`.
 In `treesitter.lua` gotmpl has been added.
@@ -552,6 +555,9 @@ Add syntax highlighting for Go related filetypes.
 ![Screenshot](nvchad-python.png)
 https://www.youtube.com/watch?v=4o6D1W0iW10
 # Python
+## Install npm for pyright
+Npm needs to be installed in order for Mason to install Pyright.\
+On Archlinux BTW `sudo pacman -S --needed npm`
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
 Add `"pyright",` to `lspconfig.servers`.
@@ -603,6 +609,9 @@ Add syntax highlighting for Python.
 ![Screenshot](nvchad-python-doc.png)
 https://www.youtube.com/watch?v=m0OobzFjEKE
 # Python (Dreams of Code)
+## Install npm for pyright
+Npm needs to be installed in order for Mason to install Pyright.\
+On Archlinux BTW `sudo pacman -S --needed npm`
 ## lspconfig
 Edit file `~/.config/nvim/lua/configs/lspconfig.lua`. \
 Add `"pyright",` to `lspconfig.servers`.
