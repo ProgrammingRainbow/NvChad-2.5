@@ -2,7 +2,8 @@ local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig") -- pre nvim 0.11
+local lspconfig = require("nvchad.configs.lspconfig") -- nvim 0.11
 
 -- list of all servers configured.
 lspconfig.servers = {
@@ -22,14 +23,16 @@ local default_servers = {
 
 -- lsps with default config
 for _, lsp in ipairs(default_servers) do
-    lspconfig[lsp].setup({
+    -- lspconfig[lsp].setup({ -- pre nvim 0.11
+    vim.lsp.config(lsp, { -- nvim 0.11
         on_attach = on_attach,
         on_init = on_init,
         capabilities = capabilities,
     })
 end
 
--- lspconfig.clangd.setup({
+-- -- lspconfig.clangd.setup({ -- pre nvim 0.11
+-- vim.lsp.config("clangd", { -- nvim 0.11
 --     on_attach = function(client, bufnr)
 --         client.server_capabilities.documentFormattingProvider = false
 --         client.server_capabilities.documentRangeFormattingProvider = false
@@ -39,7 +42,8 @@ end
 --     capabilities = capabilities,
 -- })
 
--- lspconfig.gopls.setup({
+-- -- lspconfig.gopls.setup({ -- pre nvim 0.11
+-- vim.lsp.config("gopls", { -- nvim 0.11
 --     on_attach = function(client, bufnr)
 --         client.server_capabilities.documentFormattingProvider = false
 --         client.server_capabilities.documentRangeFormattingProvider = false
@@ -49,7 +53,8 @@ end
 --     capabilities = capabilities,
 --     cmd = { "gopls" },
 --     filetypes = { "go", "gomod", "gotmpl", "gowork" },
---     root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+--     -- root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+--     root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
 --     settings = {
 --         gopls = {
 --             analyses = {
@@ -62,7 +67,8 @@ end
 --     },
 -- })
 
--- lspconfig.hls.setup({
+-- -- lspconfig.hls.setup({ -- pre nvim 0.11
+-- vim.lsp.config("hls", { -- nvim 0.11
 --     on_attach = function(client, bufnr)
 --         client.server_capabilities.documentFormattingProvider = false
 --         client.server_capabilities.documentRangeFormattingProvider = false
@@ -73,7 +79,8 @@ end
 --     capabilities = capabilities,
 -- })
 
-lspconfig.lua_ls.setup({
+-- lspconfig.lua_ls.setup({ -- pre nvim 0.11
+vim.lsp.config("lua_ls", { -- nvim 0.11
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
