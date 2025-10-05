@@ -53,8 +53,8 @@ end
 --     capabilities = capabilities,
 --     cmd = { "gopls" },
 --     filetypes = { "go", "gomod", "gotmpl", "gowork" },
---     -- root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
---     root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"),
+--     -- root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"), -- pre nvim 0.11
+--     root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"), -- nvim 0.11
 --     settings = {
 --         gopls = {
 --             analyses = {
