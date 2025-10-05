@@ -197,7 +197,8 @@ local on_attach = require("nvchad.configs.lspconfig").on_attach
 local on_init = require("nvchad.configs.lspconfig").on_init
 local capabilities = require("nvchad.configs.lspconfig").capabilities
 
-local lspconfig = require("lspconfig")
+-- local lspconfig = require("lspconfig") -- pre nvim 0.11
+local lspconfig = require("nvchad.configs.lspconfig") -- nvim 0.11
 
 -- list of all servers configured.
 lspconfig.servers = {
@@ -209,14 +210,16 @@ local default_servers = {}
 
 -- lsps with default config
 for _, lsp in ipairs(default_servers) do
-    lspconfig[lsp].setup({
+    -- lspconfig[lsp].setup({ -- pre nvim 0.11
+    vim.lsp.config(lsp, { -- nvim 0.11
         on_attach = on_attach,
         on_init = on_init,
         capabilities = capabilities,
     })
 end
 
-lspconfig.lua_ls.setup({
+-- lspconfig.lua_ls.setup({ -- pre nvim 0.11
+vim.lsp.config("lua_ls", { -- nvim 0.11
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
@@ -322,7 +325,8 @@ Create the file `~/.config/nvim/lua/configs/mason-lspconfig.lua`. \
 This entire file is simply creating a table of servers to pass into ensure_installed. \
 There is also a table at the top to add any server that should not be installed.
 ```lua
-local lspconfig = package.loaded["lspconfig"]
+-- local lspconfig = package.loaded["lspconfig"] -- pre nvim 0.11
+local lspconfig = require("nvchad.configs.lspconfig") -- nvim 0.11
 
 -- List of servers to ignore during install
 local ignore_install = {}
@@ -440,7 +444,8 @@ lspconfig.servers = {
 ```
 Add a setup for clangd. This disables formatting.
 ```lua
-lspconfig.clangd.setup({
+-- lspconfig.clangd.setup({ -- pre nvim 0.11
+vim.lsp.config("clangd", { -- nvim 0.11
     on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
@@ -502,7 +507,8 @@ lspconfig.servers = {
 ```
 Add a setup for gopls. This disables formatting and adds some linting options.
 ```lua
-lspconfig.gopls.setup({
+-- lspconfig.gopls.setup({ -- pre nvim 0.11
+vim.lsp.config("gopls", { -- nvim 0.11
     on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
@@ -512,7 +518,8 @@ lspconfig.gopls.setup({
     capabilities = capabilities,
     cmd = { "gopls" },
     filetypes = { "go", "gomod", "gotmpl", "gowork" },
-    root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"),
+    -- root_dir = lspconfig.util.root_pattern("go.work", "go.mod", ".git"), -- pre nvim 0.11
+    root_dir = require("lspconfig.util").root_pattern("go.work", "go.mod", ".git"), -- nvim 0.11
     settings = {
         gopls = {
             analyses = {
@@ -625,7 +632,8 @@ Choose default or choose to disable type checks for pyright. \
 ```
 (Choice 2) Or to prevent duplicate linting from pyright and mypy add the following. This will not stop pyright unused variable hits. I was unable to turn this off.
 ```lua
-lspconfig.pyright.setup({
+-- lspconfig.pyright.setup({ -- pre nvim 0.11
+vim.lsp.config("pyright", { -- nvim 0.11
     on_attach = on_attach,
     on_init = on_init,
     capabilities = capabilities,
@@ -826,7 +834,8 @@ Add the haskell-language-server `"hls",` to `lspconfig.servers`. Unless it's ins
 ```
 Add a setup for hls. This disables formatting.
 ```lua
-lspconfig.hls.setup({
+-- lspconfig.hls.setup({ -- pre nvim 0.11
+vim.lsp.config("hls", { -- nvim 0.11
     on_attach = function(client, bufnr)
         client.server_capabilities.documentFormattingProvider = false
         client.server_capabilities.documentRangeFormattingProvider = false
